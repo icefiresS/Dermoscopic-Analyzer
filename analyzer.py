@@ -38,7 +38,21 @@ class Analyzer():
             'vascular lesion'
         ]
         self.introduction = [
-            
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
+            '',
         ]
 
     def __call__(self, image):
