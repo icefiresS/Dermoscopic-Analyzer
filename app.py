@@ -19,7 +19,7 @@ analyzer = Analyzer()
 DATA_DIR = 'data'
 KEEP_ALIVE_DELAY = 25
 MAX_IMAGE_SIZE = 800, 600
-MAX_IMAGES = 1
+MAX_IMAGES = 5
 MAX_DURATION = 300
 
 APP = flask.Flask(__name__, static_folder=DATA_DIR)
@@ -143,8 +143,9 @@ def home():
         if i >= MAX_IMAGES:
             os.unlink(path)
             continue
-        images.append('<div><img alt="User uploaded image" src="{}" /></div>'
-                      .format(path))
+        class_, introduce = analyzer(path)
+        images.append('<div><img alt="User uploaded image" src="{}" /><p>病种: {} ({})</p></div>'
+                      .format(path, class_, introduce))
     return """
 <!doctype html>
 <title>Image Uploader</title>
@@ -204,6 +205,7 @@ dynamically view new images.</noscript>
   <input id="file" type="file" />
   <div id="drop">or drop image here</div>
 </fieldset>
+<p align='left'>可以诊断的病种共%d种: %s</p>
 
 <script>
   function sse() {
@@ -278,7 +280,8 @@ dynamically view new images.</noscript>
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
 </script>
-""" % (MAX_IMAGES, '\n'.join(images))  # noqa
+""" % (MAX_IMAGES, '\n'.join(images), len(analyzer.class_list), ', '.join(
+    ["%s(%s)" % (c, i) for (c, i) in zip(analyzer.class_list, analyzer.introduction)]))  # noqa
 
 
 if __name__ == '__main__':
