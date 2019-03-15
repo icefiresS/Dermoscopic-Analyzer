@@ -1,8 +1,8 @@
-## Dermoscopic Analyzer ##
+# Dermoscopic Analyzer ##
 
 A simple analyzer for dermoscopic images implemented by pytorch. The frontedge is inspired by the project flask-image-upload.
 
-### Introduce ###
+## Introduce ###
 
 The model is trained with ISIC dataset. Now it can classify 15 different kinds of skin disease.
 
@@ -22,7 +22,7 @@ The model is trained with ISIC dataset. Now it can classify 15 different kinds o
 - squamous cell carcinoma (鳞状细胞癌),
 - vascular lesion (血管病变).
 
-### Usage ###
+## Usage ###
 
 Install some dependencies. And run the train.py to train the model pretrained by imagenet.
 ```bash
